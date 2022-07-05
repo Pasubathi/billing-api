@@ -2,11 +2,6 @@
 import Cors from 'cors';
 import initMiddleware from '../../lib/init-middleware';
 import { prisma } from "./_base";
-/* import getConfig from 'next/config';
-const { publicRuntimeConfig } = getConfig();
-const { serverRuntimeConfig } = getConfig();
-const baseUrl = `${publicRuntimeConfig.apiUrl}/users`; */
-import notification from "./notification"
 const cors = initMiddleware(
     Cors({
       methods: ['GET', 'POST', 'OPTIONS'],
@@ -51,7 +46,6 @@ export default async function loginHandler(req, res) {
 
                         });
 
-                        notification.sendOtp()
                         if (updateUser) {
                             return res.status(200).json({
                                 otpId: updateUser.userid,

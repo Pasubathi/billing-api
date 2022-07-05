@@ -3,8 +3,6 @@ import initMiddleware from '../../lib/init-middleware'
 import { prisma } from "./_base";
 import getConfig from 'next/config';
 import jwt from 'jsonwebtoken';
-import { SALES_FORCE } from "./api";
-import { createAccount } from "./salesforce_api";
 const { serverRuntimeConfig } = getConfig();
 
 const cors = initMiddleware(
@@ -128,57 +126,6 @@ export default async function validateHandler(req, res) {
                                     data: accountDet,
                                     isNewUser: false
                                 });
-                            }else{
-                                // create a jwt token that is valid for 7 days
-                                const token = jwt.sign({ sub: updateUser.log_id }, serverRuntimeConfig.secret, { expiresIn: '1d' });
-                                const init = {
-                                    method: 'POST'
-                                };
-                                const getdata = await fetch(SALES_FORCE, init).then((response) => response.json())
-                                .then((response) => {
-                                        return response;
-                                });
-                                let salesForceToken = '';
-                                if(getdata && getdata.access_token)
-                                {
-                                    salesForceToken = getdata.access_token
-                                }
-                                const recordDet = await prisma.recordtype.findFirst({
-                                    where: {
-                                        name: "Customer Account",
-                                    },
-                                });
-                                const recordId = recordDet.sfid.toString();
-                                const obj = {
-                                    token: salesForceToken,
-                                    mobile: mobileNo,
-                                    recordId: recordId,
-                                    lname: "Test",
-                                    fname: "Test",
-                                    source: source !=="" && source !== undefined?String(source):"Website",
-                                    accountStatus: "Partial User"
-                                }
-                                const getData = await createAccount(obj);
-                                let onBoarding;
-                                if(getData && getData.success)
-                                {
-                                    return res.status(200).json({
-                                        responseCode: 200,
-                                        sfid: getData.id,
-                                        message: "Verified Successfully",
-                                        status: "success",
-                                        token,
-                                        onBoard: onBoarding,
-                                        data: getData,
-                                        isNewUser: true,
-                                    });
-                                }else{
-                                    return res.status(200).json({
-                                        status: "error",
-                                        data: getData
-                                    });
-                                }
-                               
                             }
                         } catch (e) {
                             res.status(500).send({ responseCode: 500, status:"error",message: e.message ? e.message : e })

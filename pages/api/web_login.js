@@ -2,7 +2,6 @@
 import Cors from 'cors';
 import { prisma } from "./_base";
 import initMiddleware from '../../lib/init-middleware'
-import { sendOtp } from "./eduvanz_api"
 
 const cors = initMiddleware(
     Cors({
