@@ -17,13 +17,15 @@ export default async function changePassword(req, res) {
                 return res.status(500).end(`Method ${req.method} Not Allowed`)
         }
         async function changePassword() {
-            const { user_id, password, cpassword } = req.body;
+            const { user_id, password, cpassword, current_password } = req.body;
             if (user_id == "" || user_id == undefined)
                 return res.status(500).send({ message: "User id is mandatory" })
             if (password == "" || password == undefined)
                 return res.status(500).send({ message: "Password is mandatory" })
             if (cpassword == "" || cpassword == undefined)
                 return res.status(500).send({ message: "Confirm password is mandatory" })
+            if (current_password == "" || current_password == undefined)
+                return res.status(500).send({ message: "Current password is mandatory" })
             try {
                 const user = await prisma.account__c.findUnique({
                     where: {
@@ -33,20 +35,25 @@ export default async function changePassword(req, res) {
                 if (!user) {
                     return res.status(200).send({ status:'error',  message: "Invalid account" })
                 } else {
-                   if(password == cpassword)
+                    if(user.password__c == cpassword)
                    {
-                        const user = await prisma.account__c.update({
-                            data:{
-                                password__c: cpassword
-                            },
-                            where: {
-                                id: Number(user_id)
-                            }
-                        });
-                        return res.status(200).send({ status:'success',  message: "Password Updated Successfully"})
-                   }else{
-                        return res.status(200).send({ status:'error',  message: "Password mismatch" })
-                   }
+                        if(password == cpassword)
+                        {
+                            await prisma.account__c.update({
+                                data:{
+                                    password__c: cpassword
+                                },
+                                where: {
+                                    id: Number(user_id)
+                                }
+                            });
+                            return res.status(200).send({ status:'success',  message: "Password Updated Successfully"})
+                        }else{
+                            return res.status(200).send({ status:'error',  message: "Password mismatch" })
+                        }
+                    }else{
+                        return res.status(200).send({ status:'error',  message: "Current password does't match" })
+                    }
                 }
             } catch (e) {
                 res.status(500).send({ message: e.message ? e.message : e });
