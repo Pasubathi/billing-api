@@ -17,46 +17,31 @@ export default async function loginHandler(req, res) {
                 return res.status(500).end(`Method ${req.method} Not Allowed`)
         }
         async function login() {
-            const { mobileNumber } = req.body;
-            if (mobileNumber == "" || mobileNumber == undefined || typeof mobileNumber != 'number')
-                return res.status(500).send({ message: "Mobile Number is mandatory" })
+            const { email, password } = req.body;
+            if (email == "" || email == undefined)
+                return res.status(500).send({ message: "Email is mandatory" })
+            if (password == "" || password == undefined)
+                return res.status(500).send({ message: "Password is mandatory" })
             try {
-                const user = await prisma.tmpuser.findUnique({
+                const user = await prisma.account__c.findUnique({
+                    select:{
+                        name__c: true,
+                        phone__c: true,
+                        email__c: true
+                    },
                     where: {
-                        mobile_number: mobileNumber
+                        email__c: email
                     }
                 });
                 if (!user) {
-                    return res.status(500).send({ message: "mobile number is incorrect" })
+                    return res.status(200).send({ status:'error',  message: "Invalid Login crentials" })
                 } else {
-                    let otpVal = Math.floor(1000 + Math.random() * 9000);
-                    var minutesToAdd = 3;
-                    var currentDate = new Date();
-                    var futureDate = new Date(currentDate.getTime() + minutesToAdd * 60000);
-                    try {
-                        const updateUser = await prisma.tmpuser.update({
-                            where: {
-                                userid: user.userid
-                            },
-                            data: {
-                                otp: otpVal,
-                                otp_Expiry_On: futureDate,
-                                otp_status: 0
-                            },
-
-                        });
-
-                        if (updateUser) {
-                            return res.status(200).json({
-                                otpId: updateUser.userid,
-                                message: "Message sent to your whatsapp number",
-                                otp: updateUser.otp
-                            })
-                        }
-                    } catch (e) {
-                        res.status(500).send({ message: e.message ? e.message : e });
-                        return;
-                    }
+                   if(user.password__c == password)
+                   {
+                        return res.status(200).send({ status:'success',  message: "Login successfully", data: user})
+                   }else{
+                        return res.status(200).send({ status:'error',  message: "Invalid Login crentials" })
+                   }
                 }
             } catch (e) {
                 res.status(500).send({ message: e.message ? e.message : e });
