@@ -25,6 +25,7 @@ export default async function loginHandler(req, res) {
             try {
                 const user = await prisma.account__c.findUnique({
                     select:{
+                        id: true,
                         name__c: true,
                         phone__c: true,
                         email__c: true
