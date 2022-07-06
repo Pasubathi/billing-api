@@ -10,6 +10,6 @@ module.exports = {
     publicRuntimeConfig: {
         apiUrl: process.env.NODE_ENV === 'development'
             ? 'http://localhost:3000/api' // development api
-            : 'https://eduvanz-api.herokuapp.com/api' // production api
+            : 'https://ivagam-api.herokuapp.com/api' // production api
     }
 }
