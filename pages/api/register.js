@@ -45,7 +45,7 @@ export default async function loginHandler(req, res) {
                                 password__c: cpassword
                             }
                         });
-                        return res.status(200).send({ status:'success',  message: "Invalid Login crentials" })
+                        return res.status(200).send({ status:'success',  message: "Register successfully" })
                     }else {
                         return res.status(200).send({ status:'error',  message: "Password mismatch" })
                     }
