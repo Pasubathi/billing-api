@@ -24,12 +24,6 @@ export default async function loginHandler(req, res) {
                 return res.status(200).send({ status:'error', message: "Password is mandatory" })
             try {
                 const user = await prisma.account__c.findUnique({
-                    select:{
-                        id: true,
-                        name__c: true,
-                        phone__c: true,
-                        email__c: true
-                    },
                     where: {
                         email__c: email
                     }
@@ -39,7 +33,18 @@ export default async function loginHandler(req, res) {
                 } else {
                    if(user.password__c == password)
                    {
-                        return res.status(200).send({ status:'success',  message: "Login successfully", data: user})
+                        const getData = await prisma.account__c.findFirst({
+                            select:{
+                                id: true,
+                                name__c: true,
+                                phone__c: true,
+                                email__c: true,
+                            },
+                            where: {
+                                id: user.id
+                            }
+                        });
+                        return res.status(200).send({ status:'success',  message: "Login successfully", data: getData})
                    }else{
                         return res.status(200).send({ status:'error',  message: "Invalid Login crentials" })
                    }
