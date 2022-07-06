@@ -37,7 +37,7 @@ export default async function loginHandler(req, res) {
                 if (!user) {
                     if(password == cpassword)
                     {
-                        const createUser = await prisma.account__c.findUnique({
+                        const createUser = await prisma.account__c.create({
                             data:{
                                 name__c: name,
                                 phone__c: String(phone),
