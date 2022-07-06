@@ -19,15 +19,15 @@ export default async function loginHandler(req, res) {
         async function login() {
             const { name, email, password, cpassword, phone } = req.body;
             if (name == "" || name == undefined)
-                return res.status(500).send({ message: "Name is mandatory" })
+                return res.status(200).send({ status:'error', message: "Name is mandatory" })
             if (phone == "" || phone == undefined)
-                return res.status(500).send({ message: "Phone is mandatory" })
+                return res.status(200).send({ status:'error', message: "Phone is mandatory" })
             if (email == "" || email == undefined)
-                return res.status(500).send({ message: "Email is mandatory" })
+                return res.status(200).send({ status:'error', message: "Email is mandatory" })
             if (password == "" || password == undefined)
-                return res.status(500).send({ message: "Password is mandatory" })
+                return res.status(200).send({ status:'error', message: "Password is mandatory" })
             if (cpassword == "" || cpassword == undefined)
-                return res.status(500).send({ message: "Confirm password is mandatory" })
+                return res.status(200).send({ status:'error', message: "Confirm password is mandatory" })
             try {
                 const user = await prisma.account__c.findUnique({
                     where: {
