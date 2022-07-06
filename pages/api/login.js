@@ -19,9 +19,9 @@ export default async function loginHandler(req, res) {
         async function login() {
             const { email, password } = req.body;
             if (email == "" || email == undefined)
-                return res.status(500).send({ message: "Email is mandatory" })
+                return res.status(200).send({ status:'error', message: "Email is mandatory" })
             if (password == "" || password == undefined)
-                return res.status(500).send({ message: "Password is mandatory" })
+                return res.status(200).send({ status:'error', message: "Password is mandatory" })
             try {
                 const user = await prisma.account__c.findUnique({
                     select:{
@@ -45,12 +45,12 @@ export default async function loginHandler(req, res) {
                    }
                 }
             } catch (e) {
-                res.status(500).send({ message: e.message ? e.message : e });
+                res.status(200).send({ status:'error', message: e.message ? e.message : e });
                 return;
             }// update otp process
         }
     } catch (error) {
-        res.status(500).send({ message: error.message ? error.message : error })
+        res.status(200).send({ status:'error', message: error.message ? error.message : error })
     } // get mobile number process
 
 }
