@@ -35,7 +35,7 @@ export default async function changePassword(req, res) {
                 if (!user) {
                     return res.status(200).send({ status:'error',  message: "Invalid account" })
                 } else {
-                    if(user.password__c == cpassword)
+                    if(user.password__c == current_password)
                    {
                         if(password == cpassword)
                         {
