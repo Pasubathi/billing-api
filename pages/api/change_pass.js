@@ -47,7 +47,7 @@ export default async function changePassword(req, res) {
                                     id: Number(user_id)
                                 }
                             });
-                            return res.status(200).send({ status:'success',  message: "Password Updated Successfully"})
+                             return res.status(200).send({ status:'success',  message: "Password Updated Successfully"})
                         }else{
                             return res.status(200).send({ status:'error',  message: "Password mismatch" })
                         }
