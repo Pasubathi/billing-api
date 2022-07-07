@@ -19,7 +19,7 @@ export default async function updateProfile(req, res) {
         async function updateProfile() {
             const { user_id, gst_no, company_name, address, pincode, gst_composite, mobile, nature_business, entity_type, cin_no, pan_no, website, licence_title, licence_number  } = req.body;
             if (user_id == "" || user_id == undefined)
-                return res.status(500).send({ message: "Email is mandatory" })
+                return res.status(500).send({ message: "User id is mandatory" })
             if (mobile == "" || mobile == undefined)
                 return res.status(500).send({ message: "Mobile is mandatory" })
             try {
