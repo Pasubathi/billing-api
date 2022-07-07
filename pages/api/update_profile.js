@@ -20,12 +20,10 @@ export default async function updateProfile(req, res) {
             const { user_id, gst_no, company_name, address, pincode, email, gst_composite, mobile, nature_business, entity_type, cin_no, pan_no, website, licence_title, licence_number  } = req.body;
             if (user_id == "" || user_id == undefined)
                 return res.status(500).send({ message: "User id is mandatory" })
-            if (password == "" || password == undefined)
-                return res.status(500).send({ message: "Password is mandatory" })
-            if (cpassword == "" || cpassword == undefined)
-                return res.status(500).send({ message: "Confirm password is mandatory" })
-            if (current_password == "" || current_password == undefined)
-                return res.status(500).send({ message: "Current password is mandatory" })
+            if (email == "" || email == undefined)
+                return res.status(500).send({ message: "Email is mandatory" })
+            if (mobile == "" || mobile == undefined)
+                return res.status(500).send({ message: "Mobile is mandatory" })
             try {
                 const user = await prisma.account__c.findUnique({
                     where: {
@@ -41,7 +39,20 @@ export default async function updateProfile(req, res) {
                         {
                             await prisma.account__c.update({
                                 data:{
-                                    password__c: cpassword
+                                    phone__c: mobile,
+                                    email__c: email,
+                                    gstin_cc: gst_no?gst_no:null,
+                                    compant_name__c: company_name?company_name:null,
+                                    address__c: address?address:null,
+                                    pincode__c: pincode?pincode:null,
+                                    gst_composite__c: gst_composite?gst_composite:null,
+                                    business_nature__c: nature_business?nature_business:null,
+                                    entity_type__c: entity_type?entity_type:null,
+                                    cin__c: cin_no?cin_no:null,
+                                    pan__c: pan_no?pan_no:null,
+                                    website__c: website?website:null,
+                                    license_title__c: licence_title?licence_title:null,
+                                    license_number__c: licence_number?licence_number:null
                                 },
                                 where: {
                                     id: Number(user_id)
