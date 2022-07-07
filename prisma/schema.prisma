@@ -48,7 +48,6 @@ model customer__c {
 
 model profile_c {
     id Int @id @default(autoincrement())
-    name__c String?
     phone__c String?
     email__c String? @unique
     gstin_c String?

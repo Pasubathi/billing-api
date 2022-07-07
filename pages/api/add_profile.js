@@ -7,19 +7,19 @@ const cors = initMiddleware(
       methods: ['GET', 'POST', 'OPTIONS'],
     })
 )
-export default async function updateProfile(req, res) {
+export default async function addProfile(req, res) {
     await cors(req, res);
     try {
         switch (req.method) {
             case 'POST':
-                return updateProfile();
+                return addProfile();
             default:
                 return res.status(500).end(`Method ${req.method} Not Allowed`)
         }
-        async function updateProfile() {
-            const { profile_id, gst_no, email, company_name, address, pincode, gst_composite, mobile, nature_business, entity_type, cin_no, pan_no, website, licence_title, licence_number  } = req.body;
-            if (profile_id == "" || profile_id == undefined)
-                return res.status(500).send({ message: "Profile id is mandatory" })
+        async function addProfile() {
+            const { user_id, gst_no, email, company_name, address, pincode, gst_composite, mobile, nature_business, entity_type, cin_no, pan_no, website, licence_title, licence_number  } = req.body;
+            if (user_id == "" || user_id == undefined)
+                return res.status(500).send({ message: "User id is mandatory" })
             if (company_name == "" || company_name == undefined)
                 return res.status(500).send({ message: "Company name is mandatory" })
             if (address == "" || address == undefined)
@@ -33,16 +33,9 @@ export default async function updateProfile(req, res) {
             if (entity_type == "" || entity_type == undefined)
                 return res.status(500).send({ message: "Entity type is mandatory" })
             try {
-                const profile = await prisma.profile_c.findUnique({
-                    where: {
-                        id: Number(profile_id)
-                    }
-                });
-                if (!profile) {
-                    return res.status(200).send({ status:'error',  message: "Invalid account" })
-                } else {
-                    await prisma.profile_c.update({
+                    await prisma.profile_c.create({
                         data:{
+                            account_id: Number(user_id),
                             phone__c: mobile,
                             email__c: email,
                             gstin_cc: gst_no?gst_no:null,
@@ -57,13 +50,9 @@ export default async function updateProfile(req, res) {
                             website__c: website?website:null,
                             license_title__c: licence_title?licence_title:null,
                             license_number__c: licence_number?licence_number:null
-                        },
-                        where: {
-                            id: Number(profile_id)
                         }
                     });
-                        return res.status(200).send({ status:'success',  message: "Updated Successfully"})
-        }
+                    return res.status(200).send({ status:'success',  message: "Profile Added Successfully"})
             } catch (e) {
                 res.status(500).send({ message: e.message ? e.message : e });
                 return;
