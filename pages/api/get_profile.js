@@ -25,7 +25,19 @@ export default async function getProfile(req, res) {
                     select:{
                         name__c: true,
                         phone__c: true,
-                        email__c: true
+                        email__c: true,
+                        gstin_cc: true,
+                        compant_name__c: true,
+                        address__c: true,
+                        pincode__c: true,
+                        gst_composite__c: true,
+                        business_nature__c: true,
+                        entity_type__c: true,
+                        cin__c: true,
+                        pan__c: true,
+                        website__c: true,
+                        license_title__c: true,
+                        license_number__c: true,
                     },
                     where: {
                         id: Number(user_id)
