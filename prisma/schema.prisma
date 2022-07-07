@@ -31,3 +31,52 @@ model account__c {
     license_number__c String?
     creaedDate DateTime? @default(now())
 }
+
+model customer__c {
+    id Int @id @default(autoincrement())
+    name__c String?
+    phone__c String?
+    email__c String? @unique
+    gstin__c String?
+    address__c String?
+    entity_type__c String?
+    license_title__c String?
+    license_number__c String?
+    account_id Int?
+    created_date__c DateTime? @default(now())
+}
+
+model profile_c {
+    id Int @id @default(autoincrement())
+    name__c String?
+    phone__c String?
+    email__c String? @unique
+    gstin_c String?
+    compant_name__c String?
+    address__c String?
+    pincode__c String?
+    gst_composite__c String?
+    business_nature__c String?
+    entity_type__c String?
+    cin__c String?
+    pan__c String?
+    website__c String?
+    license_title__c String?
+    license_number__c String?
+    account_id Int?
+    creaed_date__c DateTime? @default(now())
+}
+
+model vendor__c {
+    id Int @id @default(autoincrement())
+    name__c String?
+    phone__c String?
+    email__c String? @unique
+    gstin__c String?
+    address__c String?
+    entity_type__c String?
+    license_title__c String?
+    license_number__c String?
+    account_id Int?
+    created_date__c DateTime? @default(now())
+}

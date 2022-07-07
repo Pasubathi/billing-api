@@ -19,13 +19,13 @@ export default async function changePassword(req, res) {
         async function changePassword() {
             const { user_id, password, cpassword, current_password } = req.body;
             if (user_id == "" || user_id == undefined)
-                return res.status(500).send({ message: "User id is mandatory" })
+                return res.status(200).send({status:'error', message: "User id is mandatory" })
             if (password == "" || password == undefined)
-                return res.status(500).send({ message: "Password is mandatory" })
+                return res.status(200).send({status:'error', message: "Password is mandatory" })
             if (cpassword == "" || cpassword == undefined)
-                return res.status(500).send({ message: "Confirm password is mandatory" })
+                return res.status(200).send({status:'error', message: "Confirm password is mandatory" })
             if (current_password == "" || current_password == undefined)
-                return res.status(500).send({ message: "Current password is mandatory" })
+                return res.status(200).send({status:'error', message: "Current password is mandatory" })
             try {
                 const user = await prisma.account__c.findUnique({
                     where: {
