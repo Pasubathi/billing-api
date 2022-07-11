@@ -40,7 +40,8 @@ export default async function addVendor(req, res) {
                             address__c: address?address:null,
                             entity_type__c: entity_type?entity_type:null,
                             license_title__c: licence_title?licence_title:null,
-                            license_number__c: licence_number?licence_number:null
+                            license_number__c: licence_number?licence_number:null,
+                            account_id: Number(user_id)
                         }
                     });
                         return res.status(200).send({ status:'success',  message: "Vendor Added successfully"})
