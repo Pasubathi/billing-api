@@ -38,7 +38,7 @@ export default async function addProfile(req, res) {
                             account_id: Number(user_id),
                             phone__c: mobile,
                             email__c: email,
-                            gstin_cc: gst_no?gst_no:null,
+                            gstin_c: gst_no?gst_no:null,
                             compant_name__c: company_name,
                             address__c: address,
                             pincode__c: pincode?pincode:null,
