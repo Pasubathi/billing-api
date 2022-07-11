@@ -21,7 +21,7 @@ export default async function updateVendor(req, res) {
             if (vendor_id == "" || vendor_id == undefined)
                 return res.status(500).send({ message: "Vendor id is mandatory" })
             if (name == "" || name == undefined)
-                return res.status(500).send({ message: "Name is mandatory" })
+                return res.status(500).send({ message: "Vendor Name is mandatory" })
             try {
                 const vendor = await prisma.vendor__c.findUnique({
                     where: {

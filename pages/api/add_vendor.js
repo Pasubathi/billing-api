@@ -21,7 +21,7 @@ export default async function addVendor(req, res) {
             if (user_id == "" || user_id == undefined)
                 return res.status(500).send({ message: "User id is mandatory" })
             if (name == "" || name == undefined)
-                return res.status(500).send({ message: "Name is mandatory" })
+                return res.status(500).send({ message: "Vendor Name is mandatory" })
             try {
                 const accountDet = await prisma.account__c.findUnique({
                     where: {
