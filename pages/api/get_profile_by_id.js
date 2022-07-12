@@ -23,7 +23,6 @@ export default async function getProfileById(req, res) {
             try {
                 const profile = await prisma.profile_c.findUnique({
                     select:{
-                        name__c: true,
                         phone__c: true,
                         email__c: true,
                         gstin_c: true,
