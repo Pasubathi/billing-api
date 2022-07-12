@@ -79,3 +79,27 @@ model vendor__c {
     account_id Int?
     created_date__c DateTime? @default(now())
 }
+
+model product__c {
+    id Int @id @default(autoincrement())
+    name__c String?
+    category__c String?
+    sku__c String?
+    barcode__c String?
+    hsn_code__c String?
+    tax__c Float?
+    unit__c Float?
+    mrp__c Float?
+    is_sales__c Boolean?
+    is_purchase__c Boolean?
+    sales_rate__c Float?
+    purchase_rate__c Float?
+    sales_description__c String?
+    purchase_description__c String?
+    description__c String?
+    image_url__c String?
+    mesure_unit__c String?
+    account_id Int? @unique()
+    created_date__c DateTime? @default(now())
+    type__c String?
+}
