@@ -36,7 +36,8 @@ export default async function getExpenses(req, res) {
                         igst__c: true,
                         total__c: true,
                         amount_paid__c: true,
-                        created_date__c: true
+                        created_date__c: true,
+                        status__c: true
                     },
                     where: {
                         account_id: Number(user_id)

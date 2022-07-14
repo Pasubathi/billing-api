@@ -119,5 +119,9 @@ model expense__c {
     igst__c Float?
     total__c Float?
     amount_paid__c String?
+    status__c String?
+    paid_till__c Float?
+    payment_date__c DateTime?
+    mode_of_payment__c String?
     created_date__c DateTime? @default(now())
 }
