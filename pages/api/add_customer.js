@@ -19,9 +19,9 @@ export default async function addCustomer(req, res) {
         async function addCustomer() {
             const { user_id, gst_no, name, email, address, mobile, entity_type, licence_title, licence_number  } = req.body;
             if (user_id == "" || user_id == undefined)
-                return res.status(500).send({ message: "User id is mandatory" })
+                return res.status(200).send({ status:'error', message: "User id is mandatory" })
             if (name == "" || name == undefined)
-                return res.status(500).send({ message: "Name is mandatory" })
+                return res.status(200).send({ status:'error', message: "Name is mandatory" })
             try {
                 const accountDet = await prisma.account__c.findUnique({
                     where: {
@@ -47,12 +47,12 @@ export default async function addCustomer(req, res) {
                     return res.status(200).send({ status:'success',  message: "Customer added successfully"})
                 }
             } catch (e) {
-                res.status(500).send({ message: e.message ? e.message : e });
+                res.status(200).send({ status:'error', message: e.message ? e.message : e });
                 return;
             }// update otp process
         }
     } catch (error) {
-        res.status(500).send({ message: error.message ? error.message : error })
+        res.status(200).send({ status:'error', message: error.message ? error.message : error })
     } // get mobile number process
 
 }

@@ -19,7 +19,7 @@ export default async function getExpenseById(req, res) {
         async function getExpenseById() {
             const { expense_id } = req.body;
             if (expense_id == "" || expense_id == undefined)
-                return res.status(500).send({ message: "Expense id is mandatory" })
+                return res.status(200).send({ status:'error', message: "Expense id is mandatory" })
             try {
                 const expense = await prisma.expense__c.findUnique({
                     select:{
@@ -47,12 +47,12 @@ export default async function getExpenseById(req, res) {
                         return res.status(200).send({ status:'success',  message: "Success", data: expense})
                 }
             } catch (e) {
-                res.status(500).send({ message: e.message ? e.message : e });
+                res.status(200).send({ status:'error', message: e.message ? e.message : e });
                 return;
             }// update otp process
         }
     } catch (error) {
-        res.status(500).send({ message: error.message ? error.message : error })
+        res.status(200).send({ status:'error', message: error.message ? error.message : error })
     } // get mobile number process
 
 }
