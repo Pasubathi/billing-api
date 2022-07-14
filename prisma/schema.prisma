@@ -103,3 +103,21 @@ model product__c {
     created_date__c DateTime? @default(now())
     type__c String?
 }
+
+model expense__c {
+    id Int @id @default(autoincrement())
+    account_id Int? @unique
+    vendor_invoice_no__c String?
+    nature_of_expense__c String?
+    hsn__c String?
+    amount__c Float?
+    date_of_expense__c DateTime?
+    vendor_gst__c Float?
+    vendor_name__c String?
+    tax_rate__c Float?
+    cess__c String?
+    igst__c Float?
+    total__c Float?
+    amount_paid__c String?
+    created_date__c DateTime? @default(now())
+}
