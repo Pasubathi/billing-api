@@ -48,7 +48,7 @@ export default async function getProductById(req, res) {
                         id: Number(product_id)
                     }
                 });
-                if (!profile) {
+                if (!product) {
                     return res.status(200).send({ status:'error',  message: "Invalid Product" })
                 } else {
                         return res.status(200).send({ status:'success',  message: "Success", data: product})

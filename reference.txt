@@ -1,35 +1,17 @@
-pgsql admin
-admin
+Database Connection
 
-http://localhost:3000/api/users
+Host ec2-52-205-61-230.compute-1.amazonaws.com
+Database d8oemn4tae45a4
+User dxkhvyoehqsdnf
+Port 5432
+Password caaa1c2e90b10607f9ad469b7954de70e6168ab9322fba0c55581b740ff09e7b
+URI postgres://dxkhvyoehqsdnf:caaa1c2e90b10607f9ad469b7954de70e6168ab9322fba0c55581b740ff09e7b@ec2-52-205-61-230.compute-1.amazonaws.com:5432/d8oemn4tae45a4
+Heroku CLI
+heroku pg:psql postgresql-opaque-80211 --app ivagam-api
 
+heroku buildpacks -a eduvanz-lender
+heroku buildpacks:set mars/create-react-app -a eduvanz-lender
 
-npx prisma generate
-npx next dev
-face recognition 
-softpull pending
-signin with google mobile 
-
-git add .
-git commit -m "commit title"
-git push
-
-git remote add origin git@github.com:rajyaho/eduvanz-web.git
-git branch -M main
-git push -u origin main
-
-
-ALTER TABLE account 
-ALTER COLUMN isdeleted
-SET DEFAULT FALSE;
-
-
-https://cartbi.com/index.html#/home
-
-username : prod@eduvanz
-password : eduvanz@prod
-Authkey : API://EOa8rq21GFl50wZtvkyymszzOcueHMKOoNGLHd/Nu7Y=
-
-CROS ERRPR 
-
-nextjs-cors Added
+https://instabill.co/website_dashboard
+email : p.murugan103@gmail.com
+pass : Pmurugan@123
