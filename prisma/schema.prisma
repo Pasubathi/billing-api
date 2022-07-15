@@ -179,3 +179,39 @@ model payment_out__c {
     note__c String?
     created_date__c DateTime? @default(now())
 }
+
+model debit_note__c {
+    id Int @id @default(autoincrement())
+	debit_note_no__c String?
+    purchase_invoice_no__c Int?
+    date__c DateTime?
+    vendor_gstin__c String?
+    purchase_date__c DateTime?
+    vendor_name__c String?
+    vendor_address__c String?
+    vendor_mob_no__c Int?
+    place_of_supply__c String?
+    sale_preference__c String?
+    tax_type__c String?
+    subtotal__c Float?
+    cgst__c Float?
+    sgst__c Float?
+    total_amount__c Float?
+    purchase_note__c String?
+    account_id Int? @unique
+    created_date__c DateTime? @default(now())
+    status__c String?
+}
+
+model debit_order__c {
+    id Int @id @default(autoincrement())
+    debit_note_id__c Int? @unique
+    product_name__c String?
+    description__c String?
+    hsn__c String?
+    rate__c Float?
+    quantity__c Int?
+    tax_rate__c Float?
+    discount__c String?
+    amount__c Float?
+}
