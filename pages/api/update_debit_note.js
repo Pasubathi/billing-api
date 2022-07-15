@@ -89,7 +89,7 @@ export default async function addDebitNote(req, res) {
                     {
                         await prisma.debit_order__c.delete({
                             where:{
-                                debit_note_id__c: Number(purchase_id)
+                                debit_note_id__c: Number(debit_id)
                             }
                         });
                         await Promise.all(products.map(async elament =>{
