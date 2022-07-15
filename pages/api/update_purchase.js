@@ -121,7 +121,7 @@ export default async function updatePurchase(req, res) {
                             
                         ))
                     }
-                    return res.status(200).send({ status:'success',  message: "Purchase added successfully"})
+                    return res.status(200).send({ status:'success',  message: "Purchase updated successfully"})
                 }
             } catch (e) {
                 res.status(200).send({ status:'error', message: e.message ? e.message : e });
