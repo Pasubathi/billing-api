@@ -97,11 +97,9 @@ export default async function addDebitNote(req, res) {
                                 }
                             });
                         }
-
-                            
                         ))
                     }
-                    return res.status(200).send({ status:'success',  message: "Purchase added successfully"})
+                    return res.status(200).send({ status:'success',  message: "Debit note added successfully"})
                 }
             } catch (e) {
                 res.status(200).send({ status:'error', message: e.message ? e.message : e });
