@@ -66,7 +66,7 @@ export default async function addPurchase(req, res) {
                     const purchase_id = await prisma.purchase__c.create({
                         data:{
                             account_id: Number(user_id),
-                            purchase_invoice_no__c: String(purchase_invoice_no),
+                            purchase_invoice_no__c: Number(purchase_invoice_no),
                             vendor_gstin__c: String(vendor_gstin),
                             vendor_name__c: String(vendor_name),
                             vendor_address__c: String(vendor_address),
