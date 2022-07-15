@@ -189,7 +189,7 @@ model debit_note__c {
     purchase_date__c DateTime?
     vendor_name__c String?
     vendor_address__c String?
-    vendor_mob_no__c Int?
+    vendor_mob_no__c String?
     place_of_supply__c String?
     sale_preference__c String?
     tax_type__c String?
