@@ -44,7 +44,7 @@ export default async function addPaymentOut(req, res) {
                 if (!accountDet) {
                     return res.status(200).send({ status:'error',  message: "Invalid account details" })
                 } else {
-                    await prisma.purchase__c.create({
+                    await prisma.payment_out__c.create({
                         data:{
                             account_id: Number(user_id),
                             payment_type__c: String(payment_type),
