@@ -155,7 +155,7 @@ model purchase__c {
 
 model purchase_order__c {
     id Int @id @default(autoincrement())
-    purchase_id__c Int?
+    purchase_id__c Int? @unique
     product_name__c String?
     description__c String?
     hsn__c String?
