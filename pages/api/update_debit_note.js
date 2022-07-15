@@ -17,9 +17,11 @@ export default async function addDebitNote(req, res) {
                 return res.status(500).end(`Method ${req.method} Not Allowed`)
         }
         async function addDebitNote() {
-            const { user_id, debit_note_no, purchase_invoice_no, debit_date, vendor_gstin, purchase_date, vendor_name, vendor_address, vendor_mob_no, place_of_supply, sale_preference, tax_type, subtotal, cgst, sgst, total_amount, purchase_note, status, products  } = req.body;
+            const { user_id, debit_id, debit_note_no, purchase_invoice_no, debit_date, vendor_gstin, purchase_date, vendor_name, vendor_address, vendor_mob_no, place_of_supply, sale_preference, tax_type, subtotal, cgst, sgst, total_amount, purchase_note, status, products  } = req.body;
             if (user_id == "" || user_id == undefined)
                 return res.status(200).send({ status:'error', message: "User id is mandatory" })
+            if (debit_id == "" || debit_id == undefined)
+                return res.status(200).send({ status:'error', message: "Debit id is mandatory" })
             if (debit_note_no == "" || debit_note_no == undefined)
                 return res.status(200).send({ status:'error', message: "Debit note no is mandatory" })
             if (purchase_invoice_no == "" || purchase_invoice_no == undefined)
@@ -57,7 +59,10 @@ export default async function addDebitNote(req, res) {
                 if (!accountDet) {
                     return res.status(200).send({ status:'error',  message: "Invalid account details" })
                 } else {
-                    const debit_id = await prisma.debit_note__c.create({
+                    await prisma.debit_note__c.update({
+                        where:{
+                            id: Number(debit_id)
+                        },
                         data:{
                             account_id: Number(user_id),
                             debit_note_no__c: String(debit_note_no),
@@ -82,10 +87,15 @@ export default async function addDebitNote(req, res) {
                   
                     if(Array.isArray(products))
                     {
+                        await prisma.debit_order__c.delete({
+                            where:{
+                                debit_note_id__c: Number(purchase_id)
+                            }
+                        });
                         await Promise.all(products.map(async elament =>{
                             await prisma.debit_order__c.create({
                                 data:{
-                                    debit_note_id__c: Number(debit_id.id),
+                                    debit_note_id__c: Number(debit_id),
                                     product_name__c: String(elament.product_name),
                                     description__c: String(elament.description),
                                     hsn__c: String(elament.hsn),
