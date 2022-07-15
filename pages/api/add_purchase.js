@@ -93,7 +93,7 @@ export default async function addPurchase(req, res) {
                     if(Array.isArray(products))
                     {
                         await Promise.all(products.map(async elament =>{
-                            await prisma.purchase__c.create({
+                            await prisma.purchase_order__c.create({
                                 data:{
                                     purchase_id__c: Number(purchase_id),
                                     product_name__c: String(elament.product_name),
