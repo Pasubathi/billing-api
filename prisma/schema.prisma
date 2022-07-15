@@ -165,3 +165,17 @@ model purchase_order__c {
     discount__c String?
     amount__c Float?
 }
+
+model payment_out__c {
+    id Int @id @default(autoincrement())
+    account_id Int? @unique
+    payment_type__c String?
+    payment_date__c DateTime?
+    name__c String?
+    mobile_no__c String?
+    email__c String?
+    amount__c Float?
+    payment_mode String?
+    note__c String?
+    created_date__c DateTime? @default(now())
+}
