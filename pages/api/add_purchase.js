@@ -95,7 +95,7 @@ export default async function addPurchase(req, res) {
                         await Promise.all(products.map(async elament =>{
                             await prisma.purchase_order__c.create({
                                 data:{
-                                    purchase_id__c: Number(purchase_id),
+                                    purchase_id__c: Number(purchase_id.id),
                                     product_name__c: String(elament.product_name),
                                     description__c: String(elament.description),
                                     hsn__c: String(elament.hsn),
