@@ -70,7 +70,7 @@ export default async function addDebitNote(req, res) {
                             vendor_gstin__c: String(vendor_gstin),
                             vendor_name__c: String(vendor_name),
                             vendor_address__c: String(vendor_address),
-                            vendor_mob_no__c: Number(vendor_mob_no),
+                            vendor_mob_no__c: String(vendor_mob_no),
                             purchase_date__c: new Date(purchase_date),
                             date__c: new Date(debit_date),
                             place_of_supply__c: String(place_of_supply),
