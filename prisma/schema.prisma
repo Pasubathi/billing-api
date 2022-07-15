@@ -125,3 +125,43 @@ model expense__c {
     mode_of_payment__c String?
     created_date__c DateTime? @default(now())
 }
+
+model purchase__c {
+    id Int @id @default(autoincrement())
+    account_id Int? @unique
+    purchase_invoice_no__c Int?
+    date__c DateTime?
+    vendor_gstin__c String?
+    delivery_date__c DateTime?
+    vendor_name__c String?
+    vendor_address__c String?
+    vendor_mob_no__c Int?
+    delivery_address__c String?
+    place_of_supply__c String?
+    delivery_to__c String?
+    shipment_preference__c String?
+    tax_type__c String?
+    subtotal__c Float?
+    cgst__c Float?
+    sgst Float?
+    shipping_charges__c Float?
+    amount_paid__c Float?
+    balance_due__c Float?
+    total_amount__c Float?
+    purchase_note__c String?
+    created_date__c DateTime? @default(now())
+    status__c String?
+}
+
+model purchase_order__c {
+    id Int @id @default(autoincrement())
+    purchase_id__c Int?
+    product_name__c String?
+    description__c String?
+    hsn__c String?
+    rate__c Float?
+    quantity__c Int?
+    tax_rate__c Float?
+    discount__c String?
+    amount__c Float?
+}
