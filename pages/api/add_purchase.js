@@ -89,7 +89,7 @@ export default async function addPurchase(req, res) {
                             status__c: String(status)
                         }
                     });
-
+                    console.log("pid", purchase_id);
                     if(Array.isArray(products))
                     {
                         await Promise.all(products.map(async elament =>{
