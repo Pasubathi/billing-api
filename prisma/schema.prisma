@@ -235,8 +235,6 @@ model pre_purchase__c {
     cgst__c Float?
     sgst__c Float?
     shipping_charges__c Float?
-    amount_paid__c Float?
-    balance_due__c Float?
     total_amount__c Float?
     purchase_note__c String?
     created_date__c DateTime? @default(now())
