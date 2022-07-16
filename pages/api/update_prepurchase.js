@@ -17,12 +17,12 @@ export default async function updatePrePurchase(req, res) {
                 return res.status(500).end(`Method ${req.method} Not Allowed`)
         }
         async function updatePrePurchase() {
-            const { user_id, pre_purchase_id,  purchase_invoice_no, purchase_date, vendor_gstin, delivery_date, vendor_name, vendor_address, vendor_mob_no, delivery_address, place_of_supply, delivery_to, shipment_preference, tax_type, subtotal, cgst, sgst, shipping_charges, amount_paid, balance_due, total_amount, purchase_note, status, products  } = req.body;
+            const { user_id, pre_purchase_id,  purchase_order_no, purchase_date, vendor_gstin, delivery_date, vendor_name, vendor_address, vendor_mob_no, delivery_address, place_of_supply, delivery_to, shipment_preference, tax_type, subtotal, cgst, sgst, shipping_charges, amount_paid, balance_due, total_amount, purchase_note, status, products  } = req.body;
             if (user_id == "" || user_id == undefined)
                 return res.status(200).send({ status:'error', message: "User id is mandatory" })
             if (pre_purchase_id == "" || pre_purchase_id == undefined)
                 return res.status(200).send({ status:'error', message: "Purchase id is mandatory" })
-            if (purchase_invoice_no == "" || purchase_invoice_no == undefined)
+            if (purchase_order_no == "" || purchase_order_no == undefined)
                 return res.status(200).send({ status:'error', message: "Purchase invoice no is mandatory" })
             if (vendor_gstin == "" || vendor_gstin == undefined)
                 return res.status(200).send({ status:'error', message: "Vendor Gst is mandatory" })
@@ -67,7 +67,7 @@ export default async function updatePrePurchase(req, res) {
                         },
                         data:{
                             account_id: Number(user_id),
-                            purchase_order_no__c: Number(purchase_invoice_no),
+                            purchase_order_no__c: Number(purchase_order_no),
                             vendor_gstin__c: String(vendor_gstin),
                             vendor_name__c: String(vendor_name),
                             vendor_address__c: String(vendor_address),
