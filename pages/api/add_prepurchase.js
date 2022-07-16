@@ -66,7 +66,7 @@ export default async function addPrePurchase(req, res) {
                             vendor_gstin__c: String(vendor_gstin),
                             vendor_name__c: String(vendor_name),
                             vendor_address__c: String(vendor_address),
-                            vendor_mob_no__c: Number(vendor_mob_no),
+                            vendor_mob_no__c: String(vendor_mob_no),
                             delivery_date__c: new Date(delivery_date),
                             date__c: new Date(purchase_date),
                             delivery_address__c: String(delivery_address),

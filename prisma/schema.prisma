@@ -225,7 +225,7 @@ model pre_purchase__c {
     delivery_date__c DateTime?
     vendor_name__c String?
     vendor_address__c String?
-    vendor_mob_no__c Int?
+    vendor_mob_no__c String?
     delivery_address__c String?
     place_of_supply__c String?
     delivery_to__c String?
