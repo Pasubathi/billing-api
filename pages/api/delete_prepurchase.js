@@ -31,7 +31,7 @@ export default async function deletePrePurchase(req, res) {
                     return res.status(200).send({ status:'error',  message: "Invalid purchase id" })
                 } else {
 
-                    const purOrder = await prisma.pre_purchase_order__c.findMany({
+                    const purOrder = await prisma.pre_purchase_order__c.findUnique({
                         where: {
                             purchase_order_id__c: Number(pre_purchase_id)
                         }
