@@ -17,19 +17,18 @@ export default async function deleteVendor(req, res) {
                 return res.status(500).end(`Method ${req.method} Not Allowed`)
         }
         async function deleteVendor() {
-            const { vendor_id, user_id } = req.body;
+            const { vendor_id } = req.body;
             if (vendor_id == "" || vendor_id == undefined)
                 return res.status(200).send({ status:'error', message: "Vendor id is mandatory" })
-            if (user_id == "" || user_id == undefined)
-                return res.status(200).send({ status:'error', message: "User id is mandatory" })
+        
             try {
-                const accountDet = await prisma.account__c.findUnique({
+                const accountDet = await prisma.vendor__c.findUnique({
                     where: {
-                        id: Number(user_id)
+                        id: Number(vendor_id)
                     }
                 });
                 if (!accountDet) {
-                    return res.status(200).send({ status:'error',  message: "Invalid account details" })
+                    return res.status(200).send({ status:'error',  message: "Invalid vendor id" })
                 } else {
                     
                         await prisma.vendor__c.delete({
