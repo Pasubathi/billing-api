@@ -31,7 +31,7 @@ export default async function deleteDebit(req, res) {
                     return res.status(200).send({ status:'error',  message: "Invalid debit note id" })
                 } else {
 
-                    const debitOrder = await prisma.debit_order__c.findMany({
+                    const debitOrder = await prisma.debit_order__c.findUnique({
                         where: {
                             debit_note_id__c: Number(debit_id)
                         }
