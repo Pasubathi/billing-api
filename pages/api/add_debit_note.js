@@ -86,12 +86,12 @@ export default async function addDebitNote(req, res) {
                             await prisma.debit_order__c.create({
                                 data:{
                                     debit_note_id__c: Number(debit_id.id),
-                                    product_name__c: String(elament.product_name),
+                                    product_name__c: String(elament.product),
                                     description__c: String(elament.description),
                                     hsn__c: String(elament.hsn),
                                     rate__c: Number(elament.rate),
-                                    quantity__c: Number(elament.quantity),
-                                    tax_rate__c: Number(elament.tax_rate),
+                                    quantity__c: Number(elament.qty),
+                                    tax_rate__c: Number(elament.tax),
                                     discount__c: String(elament.discount),
                                     amount__c: Number(elament.amount),
                                 }
