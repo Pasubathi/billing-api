@@ -28,20 +28,20 @@ handler.post(async (req, res) => {
     try {
         var datas = {
             account_id: Number(user_id),
-            phone__c: mobile,
-            email__c: email,
-            gstin_c: gst_no?gst_no:null,
-            compant_name__c: company_name,
-            address__c: address,
-            pincode__c: pincode?pincode:null,
-            gst_composite__c: gst_composite?gst_composite:null,
-            business_nature__c: nature_business,
-            entity_type__c: entity_type,
-            cin__c: cin_no?cin_no:null,
-            pan__c: pan_no?pan_no:null,
-            website__c: website?website:null,
-            license_title__c: licence_title?licence_title:null,
-            license_number__c: licence_number?licence_number:null
+            phone__c: String(mobile),
+            email__c: String(email),
+            gstin_c: gst_no?String(gst_no):null,
+            compant_name__c: String(company_name),
+            address__c: String(address),
+            pincode__c: pincode?String(pincode):null,
+            gst_composite__c: gst_composite?String(gst_composite):null,
+            business_nature__c: String(nature_business),
+            entity_type__c: String(entity_type),
+            cin__c: cin_no?String(cin_no):null,
+            pan__c: pan_no?String(pan_no):null,
+            website__c: website?String(website):null,
+            license_title__c: licence_title?String(licence_title):null,
+            license_number__c: licence_number?String(licence_number):null
         }
         const proImage = req.files.image?req.files.image:'';
         var path = "./uploads";
