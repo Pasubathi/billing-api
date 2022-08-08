@@ -3,6 +3,8 @@ import Cors from 'cors';
 import { prisma } from "./_base";
 import middleware from '../../middleware/middleware'
 import nextConnect from 'next-connect'
+import { resolve } from 'path';
+import { rejects } from 'assert';
 var fs = require('fs');
 var mv = require('mv');
 
@@ -44,9 +46,31 @@ handler.post(async (req, res) => {
             license_number__c: licence_number?String(licence_number[0]):null
         }
         const proImage = req.files.image?req.files.image:'';
-        var path = "./uploads";
         if(proImage && proImage !==undefined && proImage.length > 0)
-    {
+        {
+           const resData = await uploadProfile(proImage);
+           if(resData.status)
+           {
+                datas.image_url__c = resData.name
+           }else{
+                return res.status(200).send({ status:"error", message: resData.error });
+           }
+        }
+        await prisma.profile_c.create({
+            data: datas
+        });
+        return res.status(200).send({ status:'success',  message: "Profile Added Successfully"})
+    } catch (e) {
+        res.status(200).send({ status:"error", message: e.message ? e.message : e });
+        return;
+    }// update otp process
+})
+
+
+async function uploadProfile(proImage)
+{
+    return new Promise((resolve, rejects)=>{
+        var path = "./uploads";
         if (!fs.existsSync(path)){
             fs.mkdirSync(path);
         }
@@ -58,21 +82,16 @@ handler.post(async (req, res) => {
         const extension = imagename.split('.').pop();
         const filename = time+'.'+extension;
         const newpath = path+'/'+filename;
-            mv(oldpath, newpath, function (err) {
-                if (err) 
-                return res.status(200).send({ status:"error", message: err });
-                datas.image_url__c = filename;
-            });
-        }
-        await prisma.profile_c.create({
-            data: datas
+        mv(oldpath, newpath, function (err) {
+            if (err) 
+            {
+                resolve({status: false, error: err})
+            }else{
+                resolve({status: true, name: filename})
+            }
         });
-        return res.status(200).send({ status:'success',  message: "Profile Added Successfully"})
-    } catch (e) {
-        res.status(200).send({ status:"error", message: e.message ? e.message : e });
-        return;
-    }// update otp process
-})
+    })
+}
 
 export const config = {
     api: {
