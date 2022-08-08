@@ -28,20 +28,20 @@ handler.post(async (req, res) => {
     try {
         var datas = {
             account_id: Number(user_id),
-            phone__c: String(mobile),
-            email__c: String(email),
-            gstin_c: gst_no?String(gst_no):null,
-            compant_name__c: String(company_name),
-            address__c: String(address),
-            pincode__c: pincode?String(pincode):null,
-            gst_composite__c: gst_composite?String(gst_composite):null,
-            business_nature__c: String(nature_business),
-            entity_type__c: String(entity_type),
-            cin__c: cin_no?String(cin_no):null,
-            pan__c: pan_no?String(pan_no):null,
-            website__c: website?String(website):null,
-            license_title__c: licence_title?String(licence_title):null,
-            license_number__c: licence_number?String(licence_number):null
+            phone__c: String(mobile[0]),
+            email__c: String(email[0]),
+            gstin_c: gst_no?String(gst_no[0]):null,
+            compant_name__c: String(company_name[0]),
+            address__c: String(address[0]),
+            pincode__c: pincode?String(pincode[0]):null,
+            gst_composite__c: gst_composite?String(gst_composite[0]):null,
+            business_nature__c: String(nature_business[0]),
+            entity_type__c: String(entity_type[0]),
+            cin__c: cin_no?String(cin_no[0]):null,
+            pan__c: pan_no?String(pan_no[0]):null,
+            website__c: website?String(website[0]):null,
+            license_title__c: licence_title?String(licence_title[0]):null,
+            license_number__c: licence_number?String(licence_number[0]):null
         }
         const proImage = req.files.image?req.files.image:'';
         var path = "./uploads";
