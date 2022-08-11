@@ -35,20 +35,20 @@ handler.post(async (req, res) => {
                 return res.status(200).send({ status:'error',  message: "Invalid profile" })
             } else {
                 var datas = {
-                    phone__c: mobile,
-                    email__c: email,
-                    gstin_c: gst_no?gst_no:null,
-                    compant_name__c: company_name,
-                    address__c: address,
-                    pincode__c: pincode?pincode:null,
-                    gst_composite__c: gst_composite?gst_composite:null,
-                    business_nature__c: nature_business,
-                    entity_type__c: entity_type,
-                    cin__c: cin_no?cin_no:null,
-                    pan__c: pan_no?pan_no:null,
-                    website__c: website?website:null,
-                    license_title__c: licence_title?licence_title:null,
-                    license_number__c: licence_number?licence_number:null
+                    phone__c: mobile[0],
+                    email__c: email[0],
+                    gstin_c: gst_no?gst_no[0]:null,
+                    compant_name__c: company_name[0],
+                    address__c: address[0],
+                    pincode__c: pincode?pincode[0]:null,
+                    gst_composite__c: gst_composite?gst_composite[0]:null,
+                    business_nature__c: nature_business[0],
+                    entity_type__c: entity_type[0],
+                    cin__c: cin_no?cin_no[0]:null,
+                    pan__c: pan_no?pan_no[0]:null,
+                    website__c: website?website[0]:null,
+                    license_title__c: licence_title[0]?licence_title:null,
+                    license_number__c: licence_number?licence_number[0]:null
                 }
                 const proImage = req.files.image?req.files.image:'';
                 if(proImage && proImage !==undefined && proImage.length > 0)
